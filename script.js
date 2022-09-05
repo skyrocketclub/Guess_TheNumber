@@ -16,7 +16,11 @@
 
 let number = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
-let highScore = 0;
+let highscore = 0;
+
+function displayMessage(message) {
+  document.querySelector('.message').textContent = message;
+}
 
 // document.querySelector('.number').textContent = number;
 
@@ -27,12 +31,12 @@ document.querySelector('.check').addEventListener('click', function () {
   if (score > 0) {
     //when there is no input
     if (!guess) {
-      document.querySelector('.message').textContent = 'No Number ⚠️';
+      displayMessage('No Number ⚠️');
     }
 
     //when player wins
     else if (guess === number) {
-      document.querySelector('.message').textContent = 'Congratulations! 🥳';
+      displayMessage('Congratulations! 🥳');
       document.querySelector('.number').textContent = number;
 
       //we write just body to signify the elements name...
@@ -40,32 +44,32 @@ document.querySelector('.check').addEventListener('click', function () {
       //we always put the values in a string
       document.querySelector('.number').style.width = '30rem';
 
-      //If the score obtained is larger than the highscore...
-      // if (score > highScore) {
-      //   document.querySelector('.label-highscore').textContent =
-      //     'New Highscore!:';
-      //   document.querySelector('.highscore').textContent = score;
-      //   highScore = score;
-      // }
+      // If the score obtained is larger than the highscore...
+      if (score > highscore) {
+        highscore = score;
+        // document.querySelector('.labelHighscore').textContent =
+        //   'New Highscore!:';
+        document.querySelector('.highscore').textContent = highscore;
+      }
     }
 
     //when guess is to low
     else if (guess < number) {
-      document.querySelector('.message').textContent = 'Too Low! 😔';
+      displayMessage('Too Low! 😔');
       score--;
       document.querySelector('.score').textContent = score;
     }
 
     //when guess is too high
     else {
-      document.querySelector('.message').textContent = 'Too High! 😯';
+      displayMessage('Too High! 😯');
       score--;
       document.querySelector('.score').textContent = score;
     }
   }
   //when the player loses the game
   else {
-    document.querySelector('.message').textContent = 'You Lost the Game! 😔';
+    displayMessage('You Lost the Game! 😔');
   }
 });
 
@@ -73,7 +77,7 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.number').textContent = '?';
   number = Math.trunc(Math.random() * 20) + 1;
   score = 20;
-  document.querySelector('.message').textContent = 'Start Guessing...';
+  displayMessage('Start Guessing...');
   document.querySelector('.score').textContent = score;
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
